@@ -1,0 +1,117 @@
+{
+    "name": "qmk-keymap-formatter",
+    "displayName": "QMK Keymap Formatter",
+    "description": "Source code formatter for QMK, keymap.c files",
+    "version": "1.0.0",
+    "publisher": "jurgen-kluft",
+    "galleryBanner": {
+        "color": "#4682B4",
+        "theme": "dark"
+    },
+    "engines": {
+        "vscode": "^1.45.0"
+    },
+    "categories": [
+        "Formatters",
+        "Other"
+    ],
+    "keywords": [
+        "QMK",
+        "keymap",
+        "c",
+        "formatter",
+        "multi-root ready"
+    ],
+    "activationEvents": [
+        "onLanguage:c",
+        "onCommand:qmkKeymapFormatter.editFormatterParameters",
+        "onCommand:qmkKeymapFormatter.whatsNew",
+        "*"
+    ],
+    "main": "./dist/extension",
+    "icon": "images/icon.png",
+    "license": "SEE LICENSE IN LICENSE.md",
+    "homepage": "https://github.com/jurgen-kluft/vscode-qmk_keymap-formatter/blob/master/README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jurgen-kluft/vscode-qmk_keymap-formatter.git"
+    },
+    "bugs": {
+        "url": "https://github.com/jurgen-kluft/vscode-qmk_keymap-formatter/issues"
+    },
+    "contributes": {
+        "commands": [
+            {
+                "command": "qmkKeymapFormatter.editFormatterParameters",
+                "title": "QMK Keymap Formatter: Edit Formatter Parameters"
+            },
+            {
+                "command": "qmkKeymapFormatter.whatsNew",
+                "title": "QMK Keymap Formatter: What's New"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "QMK Keymap Formatter",
+            "properties": {
+                "qmkKeymap.formatter.engine": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Choose the Formatter engine to be used",
+                    "enum": [
+                        "go-qmk-keymap"
+                    ]
+                },
+                "qmkKeymap.formatter.enginePath": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Indicates the Formatter app path"
+                },
+                "qmkKeymap.formatter.engineParameters": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Indicates the configuration file for the selected engine"
+                },
+                "qmkKeymap.format.indent": {
+                    "type": "number",
+                    "default": 2,
+                    "description": "The number of spaces used for indentation"
+                }
+            }
+        }
+    },
+    "eslintConfig": {
+        "extends": [
+            "vscode-ext"
+        ]
+    },
+    "scripts": {
+        "build": "webpack --mode development",
+        "watch": "webpack --watch --mode development --info-verbosity verbose",
+        "vscode:prepublish": "webpack --mode production",
+        "webpack": "webpack --mode development",
+        "webpack-dev": "webpack --mode development --watch",
+        "compile": "tsc -p ./",
+        "lint": "eslint -c package.json --ext .ts src vscode-whats-new",
+        "pretest": "npm run compile && npm run lint",
+        "test-compile": "tsc -p ./ && npm run webpack",
+        "just-test": "node ./out/src/test/runTest.js",
+        "test": "npm run test-compile && npm run just-test"
+    },
+    "devDependencies": {
+        "@types/node": "^10.14.17",
+        "@types/vscode": "^1.45.0",
+        "@typescript-eslint/eslint-plugin": "^3.8.0",
+        "@typescript-eslint/parser": "^3.8.0",
+        "eslint": "^7.6.0",
+        "eslint-config-vscode-ext": "^1.0.0",
+        "terser-webpack-plugin": "^1.2.1",
+        "ts-loader": "^4.4.2",
+        "typescript": "^3.5.1",
+        "webpack": "^4.19.1",
+        "webpack-cli": "^3.3.12",
+        "@types/mocha": "^7.0.2",
+        "mocha": "^7.1.2",
+        "vscode-test": "^1.3.0"
+    }
+}
